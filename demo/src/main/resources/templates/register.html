@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <form method="post" action="#" th:action="@{/registerUser}" th:object="${userDTO}">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" th:field="*{username}">
+            <div id="nameFeedback" class="invalid-feedback">
+                Please enter your name.
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" th:field="*{email}" th:classappend="${emailTakenError}? 'is-invalid' : '' ">
+                <div id="emailTakenError" th:text="${emailTakenError}"></div>
+                <div id="emailFeedback" class="invalid-feedback">
+                    Please enter a valid email.
+                </div>
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" th:field="*{password}" th:classappend="${param.error}? 'is-invalid' : '' " 
+                        pattern="^(?=.*[A-Z])(?=.*[\W_]).{8,}$" oninvalid="this.setCustomValidity('Password must be at least 8 characters long and contain at least one uppercase letter and one special character (!@#$%^&*)')" 
+                        oninput="this.setCustomValidity('')">
+                <div>Must contain at least 1 uppercase letter, 1 special character, and be at least 8 characters long.</div>
+                <div id="passwordFeedback" class="invalid-feedback">
+                    Please enter a strong password.
+                </div>
+            </div>
+            <div>
+                <label for="repeatPassword">Confirm password</label>
+                <input type="password" id="repeatPassword" name="repeatPassword">
+                <div id="passwordFeedback" class="invalid-feedback">
+                    Passwords do not match.
+                </div>
+            </div>
+            <input id="submit" type="submit" value="REGISTER">
+        </form>
+        <div th:if="${failedMessage}">
+            <div th:utext="${failedMessage}"></div>
+        </div>
+        <div layout:fragment="scripts">
+            <script>
+                document.querySelectorAll('.validate').forEach(input => {
+                    input.addEventListener('blur', function () {
+                        if (this.value.trim() === '') {
+                            this.classList.add('is-invalid');
+                        } else {
+                            this.classList.remove('is-invalid');
+                        }
+                    });
+                });
+    
+                let passwordInput = document.getElementById('password');
+                let repeatPasswordInput = document.getElementById('repeatPassword');
+                let submitButton = document.getElementById('submit');
+    
+                repeatPasswordInput.addEventListener('blur', function () {
+                
+                if (this.value !== passwordInput.value) {
+                    this.classList.add('is-invalid');
+                    submitButton.disabled = true;
+                } else {
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                    submitButton.disabled = false;
+                }
+                });
+    
+                let usernameTakenError = document.getElementById('usernameTakenError');
+                document.getElementById('username').addEventListener('input', function () {
+                    this.classList.remove('is-invalid');
+                    usernameTakenError.style.display = 'none';
+                });
+                let emailTakenError = document.getElementById('emailTakenError');
+                document.getElementById('email').addEventListener('input', function () {
+                    this.classList.remove('is-invalid');
+                    emailTakenError.style.display = 'none';
+                });
+            </script>
+        </div>
+    </div>
