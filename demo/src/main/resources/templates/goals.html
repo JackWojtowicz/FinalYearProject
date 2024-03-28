@@ -32,13 +32,22 @@
 <body>
     <div layout:fragment="content">
         <div>
+            <a th:href="@{completedgoals}"> List of completed goals</a>
+        </div>
+        <div>
             <p th:if="${goalsize == true}"> Goal list is empty</p>
             <div th:each="goal:${goallist}">
+                <p th:text="${goal.id}"></p>
                 <label for="displayname"> Name</label>
-                <p id="displayname" th:value="${goal.name}"></p>
+                <p id="displayname" th:text="${goal.name}"></p>
                 <label for="dispalydesc"> Description</label>
-                <p id="displaydesc" th:value="${goal.description}"></p>
-
+                <p id="displaydesc" th:text="${goal.description}"></p>
+                <label for="completion">Completed?</label>
+                <form th:action="@{/goaldone}" method="post" th:object=${updategoal}>
+                    <input type="hidden" name = "id" th:value="${goal.id}" th:field="*{id}">
+                    <input type="hidden" th:value="${goal.name}" th:field="*{name}">
+                    <input type="submit" value="Complete Goal">
+                </form>
             </div>
         </div>
         <table>

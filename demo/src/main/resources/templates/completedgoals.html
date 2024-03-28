@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div layout:fragment="content">
+        <div>
+            <a th:href="@{/goals}">List of Goals</a>
+        </div>
+        <p th:if="${goalsize == true}"> Goal list is empty</p>
+        <div>
+            <div th:each="goal:${comgoals}">
+                <label for="displayname"> Name</label>
+                <p id="displayname" th:text="${goal.name}"></p>
+                <label for="dispalydesc"> Description</label>
+                <p id="displaydesc" th:text="${goal.description}"></p>
+            </div>
+        </div>
+</body>

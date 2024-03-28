@@ -17,31 +17,31 @@ import com.example.demo.service.UserService;
 @EnableWebSecurity
 public class securityconfig {
 
-    @Autowired
-    private UserService userService;
+        @Autowired
+        private UserService userService;
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/**").permitAll()
-                        .requestMatchers("/register", "/registerUser").permitAll()
-                        // .requestMatchers("/user").hasAuthority("ROLE_USER")
-                        .anyRequest().authenticated())
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+                http
+                                .authorizeHttpRequests((requests) -> requests
+                                                .requestMatchers("/").permitAll()
+                                                .requestMatchers("/register", "/registerUser").permitAll()
+                                                // .requestMatchers("/user").hasAuthority("ROLE_USER")
+                                                .anyRequest().authenticated())
 
-                .userDetailsService(userService)
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/goals")
-                        .permitAll())
-                .logout(logout -> logout
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                        .permitAll()
+                                .userDetailsService(userService)
+                                .formLogin(form -> form
+                                                .loginPage("/login")
+                                                .loginProcessingUrl("/login")
+                                                .defaultSuccessUrl("/goals")
+                                                .permitAll())
+                                .logout(logout -> logout
+                                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                                                .permitAll()
 
-                );
+                                );
 
-        return http.build();
-    }
+                return http.build();
+        }
 
 }

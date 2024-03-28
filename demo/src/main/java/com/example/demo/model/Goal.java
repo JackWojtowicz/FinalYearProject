@@ -10,11 +10,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @NoArgsConstructor
+@Getter
 @Table(name = "goals")
 public class Goal {
     @Id
@@ -38,5 +40,13 @@ public class Goal {
         this.description = description;
         this.completion = completion;
         this.user = user;
+    }
+
+    public boolean getCompletion() {
+        return this.completion;
+    }
+
+    public long getId() {
+        return this.id;
     }
 }

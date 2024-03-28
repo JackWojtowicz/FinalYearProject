@@ -11,7 +11,9 @@ import com.example.demo.model.User;
 
 @Repository
 public interface GoalRepo extends JpaRepository<Goal, Long> {
-    Optional<Goal> findAllByUser_Id(long user_id);
+    List<Goal> findByUser_Id(long user_id);
 
     List<Goal> findByUser(User user);
+
+    List<Goal> findByUserAndCompletion(User user, boolean bool);
 }
