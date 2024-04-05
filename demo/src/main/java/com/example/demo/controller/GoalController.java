@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.Goal;
@@ -63,12 +64,12 @@ public class GoalController {
         return "redirect:/goals";
     }
 
-    @PostMapping("/goaldone")
-    public String goaldone(Model model, @ModelAttribute("updategoal") Goal goal) {
-        Optional<Goal> oldgoal = goalRepo.findById(goal.getId());
-        System.out.println(goal);
-        System.out.println(goal.getId());
-        System.out.println(goal.getName());
+    @PostMapping("/goaldone/{id}")
+    public String goaldone(Model model, @ModelAttribute("updategoal") Goal goal, @PathVariable long id) {
+        Optional<Goal> oldgoal = goalRepo.findById(id);
+        // System.out.println(goal);
+        // System.out.println(goal.getId());
+        // System.out.println(goal.getName());
         if (oldgoal.isPresent()) {
             Goal updategoal = oldgoal.get();
             updategoal.setCompletion(true);

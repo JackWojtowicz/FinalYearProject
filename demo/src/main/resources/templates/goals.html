@@ -36,19 +36,33 @@
         </div>
         <div>
             <p th:if="${goalsize == true}"> Goal list is empty</p>
-            <div th:each="goal:${goallist}">
-                <p th:text="${goal.id}"></p>
-                <label for="displayname"> Name</label>
-                <p id="displayname" th:text="${goal.name}"></p>
-                <label for="dispalydesc"> Description</label>
-                <p id="displaydesc" th:text="${goal.description}"></p>
-                <label for="completion">Completed?</label>
-                <form th:action="@{/goaldone}" method="post" th:object=${updategoal}>
-                    <input type="hidden" name = "id" th:value="${goal.id}" th:field="*{id}">
-                    <input type="hidden" th:value="${goal.name}" th:field="*{name}">
-                    <input type="submit" value="Complete Goal">
-                </form>
-            </div>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+                    <div th:each="goal:${goallist}">
+                        <tr>
+                        <!-- <label for="displayname"> Name</label> -->
+                        <td>
+                            <p id="displayname" th:text="${goal.name}"></p>
+                        </td>
+                        <!-- <label for="dispalydesc"> Description</label> -->
+                        <td>
+                            <p id="displaydesc" th:text="${goal.description}"></p>
+                        </td>
+                        <!-- <label for="completion">Completed?</label> -->
+                        <td>
+                            <form th:action="@{/goaldone/{id}(id=${goal.id})}" method="post" th:object=${updategoal}>
+                                <input type="hidden" name = "id" th:value="${goal.id}" th:field="*{id}">
+                                <input type="hidden" th:value="${goal.name}" th:field="*{name}">
+                                <input type="submit" value="Complete Goal">
+                            </form>
+                        </td>
+                        </tr>
+                    </div>
+                </tr>
+            </table>
         </div>
         <table>
             <td></td>

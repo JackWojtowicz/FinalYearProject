@@ -91,6 +91,35 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>paseq-maven-plugin</groupId>
+				<artifactId>paseq-maven-plugin</artifactId>
+				<version>0.1.1</version>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<task>
+									<exec>
+										<directory>src/main/frontend</directory>
+										<command>npm install</command>
+									</exec>
+								</task>
+								<task>
+									<exec>
+										<directory>src/main/frontend</directory>
+										<command>npm run build</command>
+									</exec>
+								</task>
+							</tasks>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
