@@ -8,16 +8,35 @@
 </head>
 <body>
     <div layout:fragment="content">
-        <div>
+        <div id="navbar">
             <a th:href="@{/goals}">List of Goals</a>
         </div>
         <p th:if="${goalsize == true}"> Goal list is empty</p>
         <div>
-            <div th:each="goal:${comgoals}">
+            <!-- <div th:each="goal:${comgoals}">
                 <label for="displayname"> Name</label>
                 <p id="displayname" th:text="${goal.name}"></p>
                 <label for="dispalydesc"> Description</label>
                 <p id="displaydesc" th:text="${goal.description}"></p>
-            </div>
+            </div> -->
+            <table id="goaltable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <!-- <th>Completion</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <div th:each="goal:${comgoals}">
+                        <tr>
+                        <!-- <label for="displayname"> Name</label> -->
+                        <td>
+                            <p id="displayname" th:text="${goal.name}"></p>
+                        </td>
+                        <!-- <label for="dispalydesc"> Description</label> -->
+                        <td>
+                            <p id="displaydesc" th:text="${goal.description}"></p>
+                        </td>
         </div>
 </body>
