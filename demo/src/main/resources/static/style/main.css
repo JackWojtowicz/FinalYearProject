@@ -89,6 +89,33 @@
   #goalform{
     display:none;
   }
+
+  #revisionmats{
+    text-align: center;
+    display:block;
+    background-color: rgb(58, 58, 58);
+    margin: 2%;
+    
+  }
+  #onemat{
+    display: flexbox;
+    text-justify: auto;
+  }
+  #addmaterial{
+    display: block;
+    text-align-last: center;
+    margin: 2%;
+  }
+  a:hover{
+    color: purple;
+  }
+  a:link{
+    color: white;
+  }
+  a:visited{
+    color: rgb(171, 171, 171)
+  }
+  
   #navbar{
     width: 100%;
     display: block;

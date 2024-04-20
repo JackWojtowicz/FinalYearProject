@@ -4,10 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">7
+    <html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <title>Revision</title>
 </head>
 <body>
     <div layout:fragment="content">
+        <div id="navbar">
+            <a th:href="@{completedgoals}"> List of completed goals</a>
+            <a th:href="@{/revision}">Revision</a>
+        </div>
+        <div sec:authorize="hasAuthority('ROLE_ADMIN')">
+            <form method = "POST" th:action="@{/addMaterial}" id = "addmaterial"enctype="multipart/form-data">
+                <!-- <input type="text" placeholder="name" th:field="*{name}"> -->
+                <input type="file" name="file">
+                <input type="submit" value="Add">
+            </form>
+        </div>
+        <div id="revisionmats">
+            <div th:each="mat:${allmats}">
+                <div id="onemat">
+                    <a id="matdownload"th:href="@{/download/{fileid}(fileid=${mat.id})}" th:text="${mat.name}"></a>
+                    <div sec:authorize="hasAuthority('ROLE_ADMIN')">
+                        <a th:href="@{delete/{fileid}(fileid=${mat.id})}">Delete</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>>
     </div>
 </body>

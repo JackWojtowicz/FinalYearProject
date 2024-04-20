@@ -10,6 +10,4 @@ import com.example.demo.model.Revision;
 
 @Repository
 public interface RevisionRepo extends JpaRepository<Revision, Long> {
-    @Override
-    List<Revision> findAll();
 }

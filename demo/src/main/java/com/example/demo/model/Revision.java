@@ -7,16 +7,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data
 @NoArgsConstructor
 @Getter
-@Table(name = "goals")
+@Table(name = "revision")
 public class Revision {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,12 +24,19 @@ public class Revision {
 
     @Column(nullable = false)
     private String name;
-
+    @Column
+    private String filetype;
     @Column(nullable = false)
-    private Blob material;
+    @Lob
+    private byte[] material;
 
-    public Revision(String name, Blob material) {
+    public Revision(String name, String filetype, byte[] material) {
         this.name = name;
+        this.filetype = filetype;
         this.material = material;
+    }
+
+    public String getStringId() {
+        return Long.toString(this.id);
     }
 }

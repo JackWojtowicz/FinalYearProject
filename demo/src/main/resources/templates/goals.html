@@ -12,6 +12,7 @@
     <div layout:fragment="content">
         <div id="navbar">
             <a th:href="@{completedgoals}"> List of completed goals</a>
+            <a th:href="@{/revision}">Revision</a>
         </div>
         <div id="tablewrapper">
             <p th:if="${goalsize == true}"> Goal list is empty</p>
