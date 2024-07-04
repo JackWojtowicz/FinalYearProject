@@ -1,5 +1,9 @@
 package com.example.demo.model;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,11 +39,20 @@ public class Goal {
     @OneToOne
     private User user;
 
-    public Goal(String name, String description, boolean completion, User user) {
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(nullable = false)
+    private Date duedate;
+
+    @Column
+    private int importance;
+
+    public Goal(String name, String description, boolean completion, User user, Date duedate) {
         this.name = name;
         this.description = description;
         this.completion = completion;
         this.user = user;
+        this.duedate = duedate;
+        this.importance = 0;
     }
 
     public boolean getCompletion() {
