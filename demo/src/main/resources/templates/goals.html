@@ -22,9 +22,21 @@
                         <div id="eachgoal">
                             <p th:text="${goal.name}"></p>
                             <p th:text="${goal.duedate}"></p>
-                            <button onclick="on()">+</button>
-                            <div id="goaloverlay" onclick="off()">
-                                <div th:text="${goal.name}"id="text"></div>
+                            <button th:onclick="on([[${goal.id}]])">+</button>
+                            <div class="goaloverlay">
+                                <div th:id="'goaloverlay'+${goal.id}" th:onclick="off([[${goal.id}]])">
+                                    <div class="text" th:id="'text'+${goal.id}">
+                                        <form>
+                                            <label for="name">Title:</label>
+                                            <input id="name"type="text" th:placeholder="${goal.name}">
+                                            <label for="desc">Description:</label>
+                                            <input id="desc" type="text" th:placeholder="${goal.description}">
+                                            <label for="duedate">DueDate:</label>
+                                            <input id="duedate"type="date" th:placeholder="${goal.duedate}">
+                                            <input type="submit" value="Change">
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                             <a th:href="@{moveup/{goalid}(goalid=${goal.id})}">-></a>
                         </div>
@@ -40,9 +52,21 @@
                             <a th:href="@{movedown/{goalid}(goalid=${goal.id})}"><-</a>
                             <p th:text="${goal.name}"></p>
                             <p th:text="${goal.duedate}"></p>
-                            <button onclick="on()">+</button>
-                            <div id="goaloverlay" onclick="off()">
-                                <div th:text="${goal.name}"id="text"></div>
+                            <button th:onclick="on([[${goal.id}]])">+</button>
+                            <div class="goaloverlay">
+                                <div th:id="'goaloverlay'+${goal.id}" th:onclick="off([[${goal.id}]])">
+                                    <div class="text" th:id="'text'+${goal.id}">
+                                        <form id="updateform">
+                                            <label for="name">Title:</label>
+                                            <input id="name"type="text" th:placeholder="${goal.name}">
+                                            <label for="desc">Description:</label>
+                                            <input id="desc" type="text" th:placeholder="${goal.description}">
+                                            <label for="duedate">DueDate:</label>
+                                            <input id="duedate"type="date" th:placeholder="${goal.duedate}">
+                                            <input type="submit" value="Change">
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                             <a th:href="@{moveup/{goalid}(goalid=${goal.id})}">-></a>
                         </div>
@@ -58,52 +82,29 @@
                             <a th:href="@{movedown/{goalid}(goalid=${goal.id})}"><-</a>
                             <p th:text="${goal.name}"></p>
                             <p th:text="${goal.duedate}"></p>
-                            <div id="goaloverlay" onclick="off()">
-                                <div th:text="${goal.name}"id="text"></div>
+                            <button th:onclick="on([[${goal.id}]])">+</button>
+                            <div class="goaloverlay">
+                                <div th:id="'goaloverlay'+${goal.id}" th:onclick="off([[${goal.id}]])">
+                                    <div class="text"th:id="'text'+${goal.id}">
+                                        <form>
+                                            <label for="name">Title:</label>
+                                            <input id="name"type="text" th:placeholder="${goal.name}">
+                                            <label for="desc">Description:</label>
+                                            <input id="desc" type="text" th:placeholder="${goal.description}">
+                                            <label for="duedate">DueDate:</label>
+                                            <input id="duedate"type="date" th:placeholder="${goal.duedate}">
+                                            <input type="submit" value="Change">
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
-                            <button onclick="on()">+</button>
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
-        <!-- <div id="tablewrapper">
-            <p th:if="${goalsize == true}"> Goal list is empty</p>
-            <table id="goaltable">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Due-Date</th>
-                        <th>Completion</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <div th:each="goal:${goallist}">
-                        <tr>
-                        <td>
-                            <p id="displayname" th:text="${goal.name}"></p>
-                        </td>
-                        <td>
-                            <p id="displaydesc" th:text="${goal.description}"></p>
-                        </td>
-                        <td>
-                            <p id="duedate" th:text="${goal.duedate}"></p>
-                        </td>
-                        <td>
-                            <form th:action="@{/goaldone/{id}(id=${goal.id})}" method="post" th:object=${updategoal}>
-                                <input type="hidden" name = "id" th:value="${goal.id}" th:field="*{id}">
-                                <input type="hidden" th:value="${goal.name}" th:field="*{name}">
-                                <input id="goaldonebutton"type="submit" value="Complete Goal">
-                            </form>
-                        </td>
-                        </tr>
-                    </div>
-                </tbody>
-            </table>
-        </div> -->
-        <div class="addgoalform" id="goalform">
+            <div class="addgoalform" id="goalform">
             <form class="popupform" th:object="${newgoal}" th:action="@{/addgoal}">
                 <label for="name">Name</label>
                 <input  th:field="*{name}" id = "name"type="text">
@@ -117,16 +118,6 @@
         </div>
         <button id="popupadd"onclick="openForm()" value="ADD">ADD</button>
     
-        <!-- <script>
-            function openForm() {
-            document.getElementsByClassName("addgoalform").style.display = "block";
-            }
-        
-            function closeForm() {
-              document.getElementsByClassName("addgoalform").style.display = "none";
-            }
-        </script> -->
-    
         <div layout:fragment="scripts">
             <script>
                 function openForm() {
@@ -139,12 +130,13 @@
                   document.getElementById("popupadd").style.display = "block";
 
                 }
-                function on() {
-                    document.getElementById("goaloverlay").style.display = "block";
+                function on(id) {
+                    document.getElementById("text"+id).style.display = "block";
+
                 }
 
-                function off() {
-                    document.getElementById("goaloverlay").style.display = "none";
+                function off(id) {
+                    document.getElementById("text"+id).style.display = "none";
                 }
             </script>
     </div>

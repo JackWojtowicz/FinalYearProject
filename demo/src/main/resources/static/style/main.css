@@ -116,28 +116,27 @@
   a:visited{
     color: rgb(171, 171, 171)
   }
-  #text{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    font-size: 50px;
-    color: white;
-    transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);
-  }
-  #goaloverlay {
-    position: fixed;
+  .text{
     display: none;
+    position: fixed;
     width: 100%;
     height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    margin: 3%;
     background-color: rgba(0,0,0,0.5);
-    z-index: 2;
+    z-index: 7;
     cursor: pointer;
   }
+  #updateform{
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    margin: 3%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 7;
+    cursor: pointer;
+  }
+
   #navbar{
     display: flex;
     padding: 2%;
