@@ -35,6 +35,10 @@ public class GoalController {
         model.addAttribute("goalsize", (goalRepo.findByUser_Id(user.getId()).isEmpty()));
         model.addAttribute("newgoal", new Goal());
         model.addAttribute("updategoal", new Goal());
+        model.addAttribute("importance0", goalRepo.findAllByUserAndImportance(user, 0));
+        model.addAttribute("importance1", goalRepo.findAllByUserAndImportance(user, 1));
+        model.addAttribute("importance2", goalRepo.findAllByUserAndImportance(user, 2));
+
         return "goals";
     }
 
@@ -75,6 +79,22 @@ public class GoalController {
             updategoal.setCompletion(true);
             goalRepo.save(updategoal);
         }
+        return "redirect:/goals";
+    }
+
+    @RequestMapping("/moveup/{goalid}")
+    public String increaseImportance(Model model, @PathVariable String goalid) {
+        Goal temp = goalRepo.findById(Long.parseLong(goalid)).get();
+        temp.setImportance(temp.getImportance() + 1);
+        goalRepo.save(temp);
+        return "redirect:/goals";
+    }
+
+    @RequestMapping("/movedown/{goalid}")
+    public String decreaseImportance(Model model, @PathVariable String goalid) {
+        Goal temp = goalRepo.findById(Long.parseLong(goalid)).get();
+        temp.setImportance(temp.getImportance() - 1);
+        goalRepo.save(temp);
         return "redirect:/goals";
     }
 

@@ -62,4 +62,8 @@ public class Goal {
     public long getId() {
         return this.id;
     }
+
+    public void setImportance(int newimportance) {
+        this.importance = newimportance;
+    }
 }

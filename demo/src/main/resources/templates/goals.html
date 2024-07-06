@@ -11,10 +11,64 @@
 <body>
     <div layout:fragment="content">
         <div id="navbar">
-            <a th:href="@{completedgoals}"> List of completed goals</a>
+            <a th:href="@{completedgoals}">CompletedGoals</a>
             <a th:href="@{/revision}">Revision</a>
         </div>
-        <div id="tablewrapper">
+        <div id="tables">
+            <div id="col1">
+                <h4>Col 1</h4>
+                <div id="importance0items" th:each="goal:${importance0}">
+                    <div id="small detail">
+                        <div id="eachgoal">
+                            <p th:text="${goal.name}"></p>
+                            <p th:text="${goal.duedate}"></p>
+                            <button onclick="on()">+</button>
+                            <div id="goaloverlay" onclick="off()">
+                                <div th:text="${goal.name}"id="text"></div>
+                            </div>
+                            <a th:href="@{moveup/{goalid}(goalid=${goal.id})}">-></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="col2">
+                <h4>Col2</h4>
+                <div id="importance1items" th:each="goal:${importance1}">
+                    <div id="small detail">
+                        <div id="eachgoal">
+                            <a th:href="@{movedown/{goalid}(goalid=${goal.id})}"><-</a>
+                            <p th:text="${goal.name}"></p>
+                            <p th:text="${goal.duedate}"></p>
+                            <button onclick="on()">+</button>
+                            <div id="goaloverlay" onclick="off()">
+                                <div th:text="${goal.name}"id="text"></div>
+                            </div>
+                            <a th:href="@{moveup/{goalid}(goalid=${goal.id})}">-></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="col3">
+                <h4>Col3</h4>
+                <div id="importance2items" th:each="goal:${importance2}">
+                    <div id="small detail">
+                        <div id="eachgoal">
+                            <a th:href="@{movedown/{goalid}(goalid=${goal.id})}"><-</a>
+                            <p th:text="${goal.name}"></p>
+                            <p th:text="${goal.duedate}"></p>
+                            <div id="goaloverlay" onclick="off()">
+                                <div th:text="${goal.name}"id="text"></div>
+                            </div>
+                            <button onclick="on()">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- <div id="tablewrapper">
             <p th:if="${goalsize == true}"> Goal list is empty</p>
             <table id="goaltable">
                 <thead>
@@ -28,18 +82,15 @@
                 <tbody>
                     <div th:each="goal:${goallist}">
                         <tr>
-                        <!-- <label for="displayname"> Name</label> -->
                         <td>
                             <p id="displayname" th:text="${goal.name}"></p>
                         </td>
-                        <!-- <label for="dispalydesc"> Description</label> -->
                         <td>
                             <p id="displaydesc" th:text="${goal.description}"></p>
                         </td>
                         <td>
                             <p id="duedate" th:text="${goal.duedate}"></p>
                         </td>
-                        <!-- <label for="completion">Completed?</label> -->
                         <td>
                             <form th:action="@{/goaldone/{id}(id=${goal.id})}" method="post" th:object=${updategoal}>
                                 <input type="hidden" name = "id" th:value="${goal.id}" th:field="*{id}">
@@ -51,7 +102,7 @@
                     </div>
                 </tbody>
             </table>
-        </div>
+        </div> -->
         <div class="addgoalform" id="goalform">
             <form class="popupform" th:object="${newgoal}" th:action="@{/addgoal}">
                 <label for="name">Name</label>
@@ -87,6 +138,13 @@
                   document.getElementById("goalform").style.display = "none";
                   document.getElementById("popupadd").style.display = "block";
 
+                }
+                function on() {
+                    document.getElementById("goaloverlay").style.display = "block";
+                }
+
+                function off() {
+                    document.getElementById("goaloverlay").style.display = "none";
                 }
             </script>
     </div>

@@ -16,4 +16,6 @@ public interface GoalRepo extends JpaRepository<Goal, Long> {
     List<Goal> findByUser(User user);
 
     List<Goal> findByUserAndCompletion(User user, boolean bool);
+
+    List<Goal> findAllByUserAndImportance(User user, int importance);
 }
