@@ -89,6 +89,7 @@
   }
   #goalform{
     display:none;
+    margin: 2%;
   }
 
   #revisionmats{
@@ -116,13 +117,22 @@
   a:visited{
     color: rgb(171, 171, 171)
   }
+  #updateclose{
+    display: flex;
+    width: 25%;
+    justify-content: center;
+    align-self: center;
+  }
   .text{
+    border-radius: 25px;
     display: none;
-    position: fixed;
-    width: 100%;
-    height: 100%;
+    width: auto;
+    height: auto;
     margin: 3%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0);
+    flex-direction: column;
+    justify-content: center;
+    align-content: stretch;
     z-index: 7;
     cursor: pointer;
   }
@@ -148,15 +158,39 @@
   }
   #eachgoal{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content:space-around;
+    align-items: stretch;
+  }
+  #popupaddflex{
+    display: flex;
+    width: 100%;
+    border-radius: 25px;
+
+  }
+  #popupformbuttons{
+    display: flex;
+  }
+  .addformbuttons{
+    flex-grow: 1;
+    background-color: rgb(58, 58,58);
+    color: white;
+    border-radius: 25px;
+    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+
+
   }
   #popupadd{
     background-color: rgb(58, 58,58);
     text-align: center;
     display: block;
-    width: 100%;
-    padding: 12px;
+    flex-grow: 1;
+    /* width:90%; */
+    /* width: 100%; */
+    margin: 2%;
+    /* padding: 12px; */
     color: white;
+    border-radius: 25px;
     box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
     
   }
@@ -164,9 +198,52 @@
     margin: 10px 70px 70px;
     box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
 }
+/* #small_detail{
+  display: flex;
+  justify-content: baseline;
+  align-items: baseline;
+} */
+#goalcontrollbutton{
+  flex-grow: 1;
+}
+#goalmovebutton{
+  flex-grow: 1;
+  border: 2px;
+}
+#goalcontrollbuttonform{
+  display: flex;
+  flex-grow: 1;
+  justify-content: baseline;
+  align-items: baseline;
+}
+#goalcontrol{
+  display: flex;
+  justify-content: baseline;
+  align-items: baseline;
+}
+#goaldetail{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#col1{
+  flex-grow: 1;
+  align-items: stretch;
+}
+#col2{
+  flex-grow: 1;
+}
+#col3{
+  flex-grow: 1;;
+}
 #tables{
     display: flex;
-    justify-content: space-evenly;
+    color: white;
+    justify-content: space-around;
+    align-items: stretch;
+    flex-grow: 1;
+    margin: 2%;
 }
 #goaltable {
     font-family: 'Poppins',sans-serif;
@@ -318,7 +395,7 @@
   }
   button{
       margin-top: 50px;
-      width: 100%;
+      width:max-content;
       background-color: #ffffff;
       color: #080710;
       padding: 15px 0;

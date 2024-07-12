@@ -35,6 +35,7 @@ public class GoalController {
         model.addAttribute("goalsize", (goalRepo.findByUser_Id(user.getId()).isEmpty()));
         model.addAttribute("newgoal", new Goal());
         model.addAttribute("updategoal", new Goal());
+        model.addAttribute("alllist", goalRepo.findByUser(user));
         model.addAttribute("importance0", goalRepo.findAllByUserAndImportance(user, 0));
         model.addAttribute("importance1", goalRepo.findAllByUserAndImportance(user, 1));
         model.addAttribute("importance2", goalRepo.findAllByUserAndImportance(user, 2));
@@ -61,6 +62,7 @@ public class GoalController {
         SecuredUser securedUser = (SecuredUser) authentication.getPrincipal();
         User user = securedUser.getUser();
         goal.setUser(user);
+        goal.setDuedate(goal.getDuedate());
         goalRepo.save(goal);
         model.addAttribute("goallist", goalRepo.findByUser(user));
         model.addAttribute("goalsize", (goalRepo.findByUser_Id(user.getId()).isEmpty()));
@@ -98,4 +100,13 @@ public class GoalController {
         return "redirect:/goals";
     }
 
+    @RequestMapping("/goalupdate")
+    public String updateGoal(Model model, @ModelAttribute("updategaol") Goal goal) {
+        Goal temp = goalRepo.findById(goal.getId()).get();
+        temp.setDescription(goal.getDescription());
+        temp.setName(goal.getName());
+        goalRepo.save(temp);
+        return "redirect:/goals";
+
+    }
 }
