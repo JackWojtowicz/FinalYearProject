@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Table(name = "goals")
-public class Goal {
+public class Goal implements Comparable<Goal> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -65,5 +65,15 @@ public class Goal {
 
     public void setImportance(int newimportance) {
         this.importance = newimportance;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return ((Goal) obj).getName().equals(getName());
+    }
+
+    @Override
+    public int compareTo(Goal goal) {
+        return getDuedate().compareTo(goal.getDuedate());
     }
 }

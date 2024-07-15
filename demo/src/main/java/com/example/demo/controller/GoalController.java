@@ -36,9 +36,9 @@ public class GoalController {
         model.addAttribute("newgoal", new Goal());
         model.addAttribute("updategoal", new Goal());
         model.addAttribute("alllist", goalRepo.findByUser(user));
-        model.addAttribute("importance0", goalRepo.findAllByUserAndImportance(user, 0));
-        model.addAttribute("importance1", goalRepo.findAllByUserAndImportance(user, 1));
-        model.addAttribute("importance2", goalRepo.findAllByUserAndImportance(user, 2));
+        model.addAttribute("importance0", goalRepo.findAllByUserAndImportanceAndCompletion(user, 0, false));
+        model.addAttribute("importance1", goalRepo.findAllByUserAndImportanceAndCompletion(user, 1, false));
+        model.addAttribute("importance2", goalRepo.findAllByUserAndImportanceAndCompletion(user, 2, false));
 
         return "goals";
     }
@@ -70,7 +70,7 @@ public class GoalController {
         return "redirect:/goals";
     }
 
-    @PostMapping("/goaldone/{id}")
+    @RequestMapping("/goaldone/{id}")
     public String goaldone(Model model, @ModelAttribute("updategoal") Goal goal, @PathVariable long id) {
         Optional<Goal> oldgoal = goalRepo.findById(id);
         // System.out.println(goal);

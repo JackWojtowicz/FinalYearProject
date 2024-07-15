@@ -18,4 +18,6 @@ public interface GoalRepo extends JpaRepository<Goal, Long> {
     List<Goal> findByUserAndCompletion(User user, boolean bool);
 
     List<Goal> findAllByUserAndImportance(User user, int importance);
+
+    List<Goal> findAllByUserAndImportanceAndCompletion(User user, int importance, boolean bool);
 }
