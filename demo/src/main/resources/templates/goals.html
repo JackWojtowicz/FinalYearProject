@@ -11,7 +11,7 @@
 <body>
     <div layout:fragment="content">
         <div id="navbar">
-            <a th:href="@{completedgoals}">CompletedGoals</a>
+            <a th:href="@{/completedgoals}">CompletedGoals</a>
             <a th:href="@{/revision}">Revision</a>
         </div>
         <div th:each="goal:${alllist}">
@@ -33,9 +33,19 @@
     </div>
         <div id="tables">
             <div id="col1">
+                <div id="tableheader">
                 <h4>LOW</h4>
-                <button th:onclick="ascsort([[${importance0}]])">ASC</button>
-                <button th:onclick="descsort([[${importance0}]])">DESC</button>
+                <div id="tableheadercontroll">
+                <form id="tableheadercontrollbuttons"method = "GET"th:action="@{/sortasc/0}">
+                    <button id="tableheadercontrollbutton">ASC</button>
+                </form>
+                <form id="tableheadercontrollbuttons"method="GET" th:action="@{/sortdsc/0}">
+                    <button id="tableheadercontrollbutton">DESC</button>
+                </form>
+                </div>
+                </div>
+                <!-- <a th:href="@{/sortasc/{importance}(importance=0)}">asc</a>
+                <a th:href="@{/sortdsc/{importance}(importance=0)}">dsc</a> -->
                 <div id="importance0items" th:each="goal:${importance0}">
                     <div id="small_detail">
                         <div id="eachgoal">
@@ -44,11 +54,11 @@
                                 <p th:text="${goal.duedate}"></p>
                             </div>
                             <div id="goalcontrol">
-                                <form id="goalcontrollbuttonform" th:action="@{goaldone/{id}(id=${goal.id})}">
+                                <form id="goalcontrollbuttonform" th:action="@{/goaldone/{id}(id=${goal.id})}">
                                     <button id="goalcontrollbutton">&#10003;</button>
                                 </form>
                                 <button id="goalcontrollbutton"th:onclick="on([[${goal.id}]])">+</button>
-                                <form id="goalcontrollbuttonform" th:action="@{moveup/{goalid}(goalid=${goal.id})}">
+                                <form id="goalcontrollbuttonform" th:action="@{/moveup/{goalid}(goalid=${goal.id})}">
                                     <button id="goalmovebutton">-></button>
                                 </form>
                             </div>
@@ -58,7 +68,17 @@
 
             </div>
             <div id="col2">
-                <h4>MILD</h4>
+                <div id="tableheader">
+                    <h4>MILD</h4>
+                    <div id="tableheadercontroll">
+                    <form id="tableheadercontrollbuttons"method = "GET"th:action="@{/sortasc/1}">
+                        <button id="tableheadercontrollbutton">ASC</button>
+                    </form>
+                    <form id="tableheadercontrollbuttons"method="GET" th:action="@{/sortdsc/1}">
+                        <button id="tableheadercontrollbutton">DESC</button>
+                    </form>
+                    </div>
+                    </div>
                 <div id="importance1items" th:each="goal:${importance1}">
                     <div id="small_detail">
                         <div id="eachgoal">
@@ -67,14 +87,14 @@
                                 <p th:text="${goal.duedate}"></p>
                             </div>
                             <div id="goalcontrol">
-                                <form id="goalcontrollbuttonform"th:action="@{movedown/{goalid}(goalid=${goal.id})}">
+                                <form id="goalcontrollbuttonform"th:action="@{/movedown/{goalid}(goalid=${goal.id})}">
                                     <button id="goalcontrollbutton"><-</button>
                                 </form>
-                                <form id="goalcontrollbuttonform" th:action="@{goaldone/{id}(id=${goal.id})}">
+                                <form id="goalcontrollbuttonform" th:action="@{/goaldone/{id}(id=${goal.id})}">
                                     <button id="goalcontrollbutton">&#10003;</button>
                                 </form>
                                 <button id="goalcontrollbutton"th:onclick="on([[${goal.id}]])">+</button>
-                                <form id="goalcontrollbuttonform" th:action="@{moveup/{goalid}(goalid=${goal.id})}">
+                                <form id="goalcontrollbuttonform" th:action="@{/moveup/{goalid}(goalid=${goal.id})}">
                                     <button id="goalmovebutton">-></button>
                                 </form>
                             </div>
@@ -84,7 +104,18 @@
 
             </div>
             <div id="col3">
-                <h4>HIGH</h4>
+                <div id="tableheader">
+                    <h4>HIGH</h4>
+
+                    <div id="tableheadercontroll">
+                    <form id="tableheadercontrollbuttons"method = "GET"th:action="@{/sortasc/2}">
+                        <button id="tableheadercontrollbutton">ASC</button>
+                    </form>
+                    <form id="tableheadercontrollbuttons"method="GET" th:action="@{/sortdsc/2}">
+                        <button id="tableheadercontrollbutton">DESC</button>
+                    </form>
+                    </div>
+                    </div>
                 <div id="importance2items" th:each="goal:${importance2}">
                     <div id="small_detail">
                         <div id="eachgoal">
@@ -93,10 +124,10 @@
                                 <p th:text="${goal.duedate}"></p>
                             </div>
                             <div id="goalcontrol">
-                                <form id="goalcontrollbuttonform"th:action="@{movedown/{goalid}(goalid=${goal.id})}">
+                                <form id="goalcontrollbuttonform"th:action="@{/movedown/{goalid}(goalid=${goal.id})}">
                                     <button id="goalcontrollbutton"><-</button>
                                 </form>
-                                <form id="goalcontrollbuttonform" th:action="@{goaldone/{id}(id=${goal.id})}">
+                                <form id="goalcontrollbuttonform" th:action="@{/goaldone/{id}(id=${goal.id})}">
                                     <button id="goalcontrollbutton">&#10003;</button>
                                 </form>
                                 <button id="goalcontrollbutton"th:onclick="on([[${goal.id}]])">+</button>
@@ -127,6 +158,7 @@
     
         <div layout:fragment="scripts">
             <script>
+                duedate.min = new Date().toISOString().split("T")[0];
                 function openForm() {
                 document.getElementById("goalform").style.display = "block";
                 document.getElementById("popupadd").style.display = "none";

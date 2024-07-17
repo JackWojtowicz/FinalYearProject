@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,11 +14,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.model.Goal;
 import com.example.demo.model.SecuredUser;
 import com.example.demo.model.User;
 import com.example.demo.repositary.GoalRepo;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +32,7 @@ public class GoalController {
     @Autowired
     GoalRepo goalRepo;
 
-    @GetMapping("/goals")
+    @RequestMapping("/goals")
     public String goalsPage(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         SecuredUser securedUser = (SecuredUser) authentication.getPrincipal();
@@ -36,10 +42,15 @@ public class GoalController {
         model.addAttribute("newgoal", new Goal());
         model.addAttribute("updategoal", new Goal());
         model.addAttribute("alllist", goalRepo.findByUser(user));
-        model.addAttribute("importance0", goalRepo.findAllByUserAndImportanceAndCompletion(user, 0, false));
-        model.addAttribute("importance1", goalRepo.findAllByUserAndImportanceAndCompletion(user, 1, false));
-        model.addAttribute("importance2", goalRepo.findAllByUserAndImportanceAndCompletion(user, 2, false));
-
+        if (model.getAttribute("importance0") == null) {
+            model.addAttribute("importance0", goalRepo.findAllByUserAndImportanceAndCompletion(user, 0, false));
+        }
+        if (model.getAttribute("importance1") == null) {
+            model.addAttribute("importance1", goalRepo.findAllByUserAndImportanceAndCompletion(user, 1, false));
+        }
+        if (model.getAttribute("importance2") == null) {
+            model.addAttribute("importance2", goalRepo.findAllByUserAndImportanceAndCompletion(user, 2, false));
+        }
         return "goals";
     }
 
@@ -107,6 +118,64 @@ public class GoalController {
         temp.setName(goal.getName());
         goalRepo.save(temp);
         return "redirect:/goals";
+
+    }
+
+    @RequestMapping("/sortasc/{importance}")
+    public String sortasc(Model model, @PathVariable int importance, RedirectAttributes redirectAttrs) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        SecuredUser securedUser = (SecuredUser) authentication.getPrincipal();
+        User user = securedUser.getUser();
+        List<Goal> asc = goalRepo.findAllByUserAndImportanceAndCompletion(user, importance, false);
+        Collections.sort(asc);
+        model.addAttribute("importance" + importance, asc);
+        model.addAttribute("goallist", goalRepo.findByUserAndCompletion(user, false));
+        model.addAttribute("goalsize", (goalRepo.findByUser_Id(user.getId()).isEmpty()));
+        model.addAttribute("newgoal", new Goal());
+        model.addAttribute("updategoal", new Goal());
+        model.addAttribute("alllist", goalRepo.findByUser(user));
+        if (importance == 0) {
+            model.addAttribute("importance1", goalRepo.findAllByUserAndImportanceAndCompletion(user, 1, false));
+            model.addAttribute("importance2", goalRepo.findAllByUserAndImportanceAndCompletion(user, 2, false));
+        }
+        if (importance == 1) {
+            model.addAttribute("importance0", goalRepo.findAllByUserAndImportanceAndCompletion(user, 0, false));
+            model.addAttribute("importance2", goalRepo.findAllByUserAndImportanceAndCompletion(user, 2, false));
+        }
+        if (importance == 2) {
+            model.addAttribute("importance1", goalRepo.findAllByUserAndImportanceAndCompletion(user, 1, false));
+            model.addAttribute("importance0", goalRepo.findAllByUserAndImportanceAndCompletion(user, 0, false));
+        }
+        return "goals";
+
+    }
+
+    @RequestMapping("/sortdsc/{importance}")
+    public String sortdsc(Model model, @PathVariable int importance) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        SecuredUser securedUser = (SecuredUser) authentication.getPrincipal();
+        User user = securedUser.getUser();
+        List<Goal> asc = goalRepo.findAllByUserAndImportanceAndCompletion(user, importance, false);
+        Collections.sort(asc, Collections.reverseOrder());
+        model.addAttribute("importance" + importance, asc);
+        model.addAttribute("goallist", goalRepo.findByUserAndCompletion(user, false));
+        model.addAttribute("goalsize", (goalRepo.findByUser_Id(user.getId()).isEmpty()));
+        model.addAttribute("newgoal", new Goal());
+        model.addAttribute("updategoal", new Goal());
+        model.addAttribute("alllist", goalRepo.findByUser(user));
+        if (importance == 0) {
+            model.addAttribute("importance1", goalRepo.findAllByUserAndImportanceAndCompletion(user, 1, false));
+            model.addAttribute("importance2", goalRepo.findAllByUserAndImportanceAndCompletion(user, 2, false));
+        }
+        if (importance == 1) {
+            model.addAttribute("importance0", goalRepo.findAllByUserAndImportanceAndCompletion(user, 0, false));
+            model.addAttribute("importance2", goalRepo.findAllByUserAndImportanceAndCompletion(user, 2, false));
+        }
+        if (importance == 2) {
+            model.addAttribute("importance1", goalRepo.findAllByUserAndImportanceAndCompletion(user, 1, false));
+            model.addAttribute("importance0", goalRepo.findAllByUserAndImportanceAndCompletion(user, 0, false));
+        }
+        return "goals";
 
     }
 }

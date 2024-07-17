@@ -221,6 +221,25 @@
   justify-content: baseline;
   align-items: baseline;
 }
+#tableheader{
+  display: flex;
+  flex-flow: column;
+}
+#tableheadercontroll{
+  display: flex;
+  flex-flow: row;
+  justify-content: space-evenly;
+  flex-grow: 1;
+}
+#tableheadercontrollbuttons{
+  display: flex;
+  flex-grow: 1;
+}
+#tableheadercontrollbutton{
+  flex-grow: 1;
+  border-radius: 25px;
+  margin:2% ;
+}
 #goaldetail{
   display: flex;
   flex-direction: column;
