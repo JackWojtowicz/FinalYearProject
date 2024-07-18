@@ -12,8 +12,8 @@
 <body>
     <div layout:fragment="content">
         <div id="navbar">
-            <a th:href="@{completedgoals}"> List of completed goals</a>
-            <a th:href="@{/revision}">Revision</a>
+            <a th:href="@{/completedgoals}"> List of completed goals</a>
+            <a th:href="@{/goals}">Goals</a>
         </div>
         <div sec:authorize="hasAuthority('ROLE_ADMIN')">
             <form method = "POST" th:action="@{/addMaterial}" id = "addmaterial"enctype="multipart/form-data">

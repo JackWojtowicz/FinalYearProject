@@ -14,30 +14,43 @@
         </div>
         <p th:if="${goalsize == true}"> Goal list is empty</p>
         <div>
-            <!-- <div th:each="goal:${comgoals}">
-                <label for="displayname"> Name</label>
-                <p id="displayname" th:text="${goal.name}"></p>
-                <label for="dispalydesc"> Description</label>
-                <p id="displaydesc" th:text="${goal.description}"></p>
-            </div> -->
-            <table id="goaltable">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <!-- <th>Completion</th> -->
+            <!-- <table id="goaltable">
+                <thead id="goaltableheader">
+                    <tr id="goaltableheader">
+                        <th id="goaltablehead">Name</th>
+                        <th id="goaltablehead">Description</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="goaltablebody">
                     <div th:each="goal:${comgoals}">
-                        <tr>
-                        <!-- <label for="displayname"> Name</label> -->
-                        <td>
+                        <tr id="goaltableheader">
+                            <td id="goaltablehead">
                             <p id="displayname" th:text="${goal.name}"></p>
-                        </td>
-                        <!-- <label for="dispalydesc"> Description</label> -->
-                        <td>
+                            </td>
+                            <td id="goaltablehead">
                             <p id="displaydesc" th:text="${goal.description}"></p>
-                        </td>
+                            </td>
+                        </tr>
+                    </div>
+                </tbody>
+            </table> -->
+            <div id="goaltable">
+                <div id="goaltableheader">
+                    <h3 id="goaltablehead">Name</h3>
+                    <div th:each="goal:${comgoals}">
+                        <div id="goaltableheader">
+                            <p id="goaltablehead"th:text="${goal.name}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div id="goaltableheader">
+                    <h3 id="goaltablehead">Description</h3>
+                    <div th:each="goal:${comgoals}">
+                        <div id="goaltableheader">
+                            <p id="goaltablehead"th:text="${goal.description}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 </body>

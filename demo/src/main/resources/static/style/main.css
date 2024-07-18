@@ -265,17 +265,33 @@
     margin: 2%;
 }
 #goaltable {
-    font-family: 'Poppins',sans-serif;
-    text-align: center;
-    border-radius: 5px;
-    font-size: 12px;
-    font-weight: normal;
-    border: none;
-    border-collapse: collapse;
-    width: 100%;
-    max-width: 100%;
-    white-space: nowrap;
-    background-color: white;
+  background-color: (58,58,58);
+    display: flex;
+    border-radius: 25px;
+    margin: 2%;
+    flex-flow: row;
+    color: white;
+}
+#goaltablebody{
+  display: flex;
+  flex-flow: column;
+}
+#goaltableheader{
+  display: flex;
+  border-radius: 25px;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+#goaltablehead{
+  display: flex;
+  border-radius: 25px;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(211, 211, 211, 0.5);
+  
 }
 #goaldonebutton{
     color: rgb(255, 255, 255);
@@ -292,7 +308,7 @@
 
 #goaltable td {
     border-right: 1px solid #f8f8f8;
-    /* font-size: 12px; */
+    font-size: 12px;
     background-color:rgb(58, 58, 58);
     align-content:baseline;
 }
@@ -312,7 +328,6 @@
     background: #F8F8F8;
 }
 
-/* Responsive */
 
 @media (max-width: 767px) {
     #goaltable {
@@ -379,7 +394,7 @@
     table tbody td {
         display: block;
         text-align: center;
-    }
+    } 
 }
   #have_account{
     height: 50px;
