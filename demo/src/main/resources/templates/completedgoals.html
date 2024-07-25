@@ -11,29 +11,11 @@
         <div id="navbar">
             <a th:href="@{/goals}">List of Goals</a>
             <a th:href="@{/revision}">Revision</a>
+            <a href="#" th:href="@{/logout}">Logout</a>
+
         </div>
         <p th:if="${goalsize == true}"> Goal list is empty</p>
         <div>
-            <!-- <table id="goaltable">
-                <thead id="goaltableheader">
-                    <tr id="goaltableheader">
-                        <th id="goaltablehead">Name</th>
-                        <th id="goaltablehead">Description</th>
-                    </tr>
-                </thead>
-                <tbody id="goaltablebody">
-                    <div th:each="goal:${comgoals}">
-                        <tr id="goaltableheader">
-                            <td id="goaltablehead">
-                            <p id="displayname" th:text="${goal.name}"></p>
-                            </td>
-                            <td id="goaltablehead">
-                            <p id="displaydesc" th:text="${goal.description}"></p>
-                            </td>
-                        </tr>
-                    </div>
-                </tbody>
-            </table> -->
             <div id="goaltable">
                 <div id="goaltableheader">
                     <h3 id="goaltablehead">Name</h3>

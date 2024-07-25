@@ -13,6 +13,7 @@
         <div id="navbar">
             <a th:href="@{/completedgoals}">CompletedGoals</a>
             <a th:href="@{/revision}">Revision</a>
+            <a href="#" th:href="@{/logout}">Logout</a>
         </div>
         <div th:each="goal:${alllist}">
             <div class="goaloverlay">

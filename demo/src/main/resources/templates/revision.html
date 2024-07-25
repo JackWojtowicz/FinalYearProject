@@ -14,6 +14,7 @@
         <div id="navbar">
             <a th:href="@{/completedgoals}"> List of completed goals</a>
             <a th:href="@{/goals}">Goals</a>
+            <a href="#" th:href="@{/logout}">Logout</a>
         </div>
         <div sec:authorize="hasAuthority('ROLE_ADMIN')">
             <form method = "POST" th:action="@{/addMaterial}" id = "addmaterial"enctype="multipart/form-data">
@@ -26,6 +27,11 @@
             <div th:each="mat:${allmats}">
                 <div id="onemat">
                     <a id="matdownload"th:href="@{/download/{fileid}(fileid=${mat.id})}" th:text="${mat.name}"></a>
+                    <button onclick="showpreview(id)">+</button>
+                    <div th:id="'materialpreview'+${mat.id}">
+                        <a th:href="@{/preview/{id}(id=${mat.id})}">Display</a>
+                        <embed type="application/pdf" th:src="@{/preview/{id}(id=${mat.id})}">
+                    </div>
                     <div sec:authorize="hasAuthority('ROLE_ADMIN')">
                         <a th:href="@{delete/{fileid}(fileid=${mat.id})}">Delete</a>
                     </div>
@@ -33,5 +39,12 @@
                 </div>
             </div>
         </div>>
+    </div>
+    <div layout:fragment="scripts">
+        <script>
+            function showpreview(id){
+                document.getElementById("materialpreview"+id);
+            }
+        </script>
     </div>
 </body>

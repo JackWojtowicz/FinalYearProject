@@ -28,7 +28,6 @@ public class securityconfig {
                                                 .requestMatchers("/register", "/registerUser").permitAll()
                                                 // .requestMatchers("/user").hasAuthority("ROLE_USER")
                                                 .anyRequest().authenticated())
-
                                 .userDetailsService(userService)
                                 .formLogin(form -> form
                                                 .loginPage("/login")
@@ -37,9 +36,9 @@ public class securityconfig {
                                                 .permitAll())
                                 .logout(logout -> logout
                                                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                                                .permitAll()
-
-                                );
+                                                .logoutSuccessUrl("/login")
+                                                .permitAll())
+                                .headers().frameOptions().sameOrigin();
 
                 return http.build();
         }
