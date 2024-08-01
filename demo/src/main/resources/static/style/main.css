@@ -91,21 +91,60 @@
     display:none;
     margin: 2%;
   }
-
+  #materialform{
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+  }
+  #materialbutton{
+    margin: 25px;
+    align-self: flex-start;
+    height: 100%;
+    flex-grow: 1;
+    border-radius: 25px;
+  }
+  #materialdelbutton{
+    margin: 25px;
+    align-self: flex-start;
+    height: 100%;
+    flex-grow: 1;
+    border-radius: 25px;
+    width: 100%;
+  }
   #revisionmats{
     text-align: center;
     display:block;
     background-color: rgb(58, 58, 58);
-    margin: 2%;
+    margin-top: 2%;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: 25px;
     
   }
+  #materialloop{
+    border-radius: 20px;
+  }
   #onemat{
-    display: flexbox;
-    text-justify: auto;
+    border-collapse: separate; 
+    border-radius: 25px;
+    overflow: hidden;
+  }
+  #addforminput{
+    text-align: center;
+    flex-grow: 1;
+  }
+  #fileinput{
+    text-align: center;
+    flex-grow: 1;
+  }
+  #addmaterialform{
+    width:75%
   }
   #addmaterial{
-    display: block;
-    text-align-last: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     margin: 2%;
   }
   a:hover{
@@ -284,6 +323,42 @@
   justify-content: space-between;
 
 }
+a {
+  text-decoration: none;
+}
+#navbarlink{
+  background-color: #2b2a31;
+  padding: 20px;
+  border-radius: 25px;
+}
+#matdownload{
+  flex-grow: 3;
+  color: white;
+}
+#materialless{
+  margin: 1%;
+  width: 25%;
+  border-radius: 25px;
+}
+#materialdownloadbutton{
+  margin: 25px;
+  height: 100%;
+  width: 100%;
+  border-radius: 25px;
+}
+.materialpreview{
+  display: none;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+#materialcontroll{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+  overflow: hidden;
+}
 #goaltablehead{
   display: flex;
   border-radius: 25px;
@@ -323,9 +398,65 @@
     color: #000000;
     background: #e2f534;
 }
-
+#rankings{
+  display: flex;
+  color: rgb(255, 255, 255);
+  flex-direction: row;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 1%;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background-color: rgb(81, 81, 81);
+  border-radius: 20px;
+}
+#loggedinuserscore{
+  display: flex;
+  flex-direction: row;
+  margin-left: 25%;
+  margin-right: 25%;
+  color: black;
+  background-color: rgb(253, 226, 76);
+  border-radius: 20px;
+}
+#loggedrankdetail{
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+}
+/* #rankingtable{
+  margin-left: 15%;
+  margin-right: 15%;
+} */
+#rankplace{
+  display: flex;
+  flex-grow: 1;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  /* flex-basis: 100%; */
+}
+#rankdetail{
+  display: flex;
+  flex-grow: 5;
+  width: 55%;
+  justify-content: center;
+  align-items: center;
+  /* flex-basis: 100%; */
+}
 #goaltable tr:nth-child(even) {
     background: #F8F8F8;
+}
+#leaderboardheader{
+  display: flex;
+  color: white;
+  text-align: center;
+  justify-content: center;
+  background-color: #9fd3c7;
+  margin: 2%;
+  border-radius: 25px;
 }
 
 

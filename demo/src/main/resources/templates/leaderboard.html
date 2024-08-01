@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goals</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <div id="navbar">
+            <a id="navbarlink" th:href="@{/completedgoals}"> List of completed goals</a>
+            <a id="navbarlink" th:href="@{/goals}">Goals</a>
+            <a id="navbarlink" th:href="@{/revision}">Revision</a>
+            <a id="navbarlink" href="#" th:href="@{/logout}">Logout</a>
+        </div>
+        <div id="loggedinuserscore">
+            <h3 id="loggedscorerank" th:text="${index}"></h3>
+            <p id="loggedrankdetail"th:text="${founduser.username}"></p>
+            <p id="loggedrankdetail"th:text="${founduser.score}"></p>
+        </div>
+        <div id="leaderboardheader">
+            <h2>TOP SCORES</h2>
+        </div>
+        <div id="rankingtable"th:each="top , iStat:${top10}">
+            <div id="rankings">
+                <h3 id="rankplace"th:text="${iStat.index +1}"></h3>
+                <p id="rankdetail"th:text="${top.username}"></p>
+                <p id="rankdetail"th:text="${top.score}"></p>
+            </div>
+        <div>

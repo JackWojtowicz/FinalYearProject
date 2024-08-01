@@ -20,7 +20,7 @@ public class RevisionService {
     public Revision storefile(MultipartFile file) throws Exception {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         try {
-            Revision revision = new Revision(fileName, "application/pdf", file.getBytes());
+            Revision revision = new Revision(fileName, file.getContentType(), file.getBytes());
             return revisionrepo.save(revision);
         } catch (IOException ex) {
             throw new Exception("couldnt store file", ex);

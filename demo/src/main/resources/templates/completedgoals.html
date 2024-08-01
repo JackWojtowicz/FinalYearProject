@@ -9,10 +9,10 @@
 <body>
     <div layout:fragment="content">
         <div id="navbar">
-            <a th:href="@{/goals}">List of Goals</a>
-            <a th:href="@{/revision}">Revision</a>
-            <a href="#" th:href="@{/logout}">Logout</a>
-
+            <a id="navbarlink" th:href="@{/revision}">Revision</a>
+            <a id="navbarlink" th:href="@{/goals}">Goals</a>
+            <a id="navbarlink" th:href="@{/leaderboard}">LeaderBoard</a>
+            <a id="navbarlink" href="#" th:href="@{/logout}">Logout</a>
         </div>
         <p th:if="${goalsize == true}"> Goal list is empty</p>
         <div>

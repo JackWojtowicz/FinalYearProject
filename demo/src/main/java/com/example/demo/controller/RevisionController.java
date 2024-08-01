@@ -27,11 +27,12 @@ import org.springframework.stereotype.Controller;
 import com.example.demo.model.DataRevision;
 import com.example.demo.model.Revision;
 import com.example.demo.repositary.RevisionRepo;
+import com.example.demo.repositary.UserRepo;
 import com.example.demo.service.RevisionService;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.ui.Model;
-
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -83,14 +84,15 @@ public class RevisionController {
         if (file.isEmpty()) {
             return "redirect:/revision";
         }
+        // if (StringUtils.endsWithIgnoreCase(file.getName(), "pdf")) {
         Revision revision = revisionService.storefile(file);
         downloadurl = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/download")
                 .path((revision.getStringId()))
                 .toUriString();
-        // return new DataRevision(revision.getName(), downloadurl,
-        // file.getContentType(), file.getSize());
+
         return "redirect:/revision";
+
     }
 
     @GetMapping("/download/{revisionId}")

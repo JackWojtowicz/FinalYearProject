@@ -11,9 +11,10 @@
 <body>
     <div layout:fragment="content">
         <div id="navbar">
-            <a th:href="@{/completedgoals}">CompletedGoals</a>
-            <a th:href="@{/revision}">Revision</a>
-            <a href="#" th:href="@{/logout}">Logout</a>
+            <a id="navbarlink" th:href="@{/completedgoals}"> List of completed goals</a>
+            <a id="navbarlink" th:href="@{/revision}">Revision</a>
+            <a id="navbarlink" th:href="@{/leaderboard}">LeaderBoard</a>
+            <a id="navbarlink" href="#" th:href="@{/logout}">Logout</a>
         </div>
         <div th:each="goal:${alllist}">
             <div class="goaloverlay">
@@ -194,5 +195,6 @@
                 }
             </script>
     </div>
+</div>
 </body>
 

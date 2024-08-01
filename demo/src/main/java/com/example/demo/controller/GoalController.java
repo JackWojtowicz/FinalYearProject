@@ -20,6 +20,7 @@ import com.example.demo.model.Goal;
 import com.example.demo.model.SecuredUser;
 import com.example.demo.model.User;
 import com.example.demo.repositary.GoalRepo;
+import com.example.demo.repositary.UserRepo;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -31,6 +32,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class GoalController {
     @Autowired
     GoalRepo goalRepo;
+    @Autowired
+    UserRepo userrepo;
 
     @RequestMapping("/goals")
     public String goalsPage(Model model) {
@@ -87,10 +90,15 @@ public class GoalController {
         // System.out.println(goal);
         // System.out.println(goal.getId());
         // System.out.println(goal.getName());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        SecuredUser securedUser = (SecuredUser) authentication.getPrincipal();
+        User user = securedUser.getUser();
         if (oldgoal.isPresent()) {
             Goal updategoal = oldgoal.get();
             updategoal.setCompletion(true);
             goalRepo.save(updategoal);
+            user.setScore(user.getScore() + 1);
+            userrepo.save(user);
         }
         return "redirect:/goals";
     }
