@@ -18,16 +18,21 @@
         </div>
             <div id="userupdateform">
                 <form th:object="${updateuser}" th:action="@{/admin/updateuser/accept/{id}(id=${user.id})}">
+                    
                     <label for="username">Username:</label>
-                    <input id="username"th:name="username"type="text" th:value="${user.username}">
+                    <input class="userforminput"id="username"th:name="username"type="text" th:value="${user.username}">
+                    
                     <label for="password">Password:</label>
-                    <input id="password"th:name="password"type="password" th:value="${user.password}">
+                    <input class="userforminput"id="password"th:name="password"type="password" th:value="${user.password}">
+                    
                     <label for="email">Email:</label>
-                    <input id="email"th:name="email"type="email" th:value="${user.email}">
+                    <input class="userforminput"id="email"th:name="email"type="email" th:value="${user.email}">
+                    
                     <label for="score">Score:</label>
-                    <input id="score"th:name="score"type="number" th:value="${user.score}">
+                    <input class="userforminput"id="score"th:name="score"type="number" th:value="${user.score}">
+                    
                     <label for="grade">Grades</label>
-                    <select id="grade" th:name="grade">
+                    <select class="userforminput"id="grade" th:name="grade">
                         <option th:value="${user.grade}" selected="selected"hidden="hidden">Choose a Grade</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -35,7 +40,7 @@
                         <option value="4">4</option>
                         <option value="5">5</option>
                     </select>
-                    <input type="submit" value="CHANGE">
+                    <input class="userforminput"type="submit" value="CHANGE">
                 </form>
             </div>
     </div>

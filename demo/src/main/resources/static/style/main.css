@@ -536,7 +536,18 @@ a {
   display: flex;
   background-color: lightblue;
   border-radius: 20px;
-  margin: 2%;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 2%;
+  justify-content: center;
+  align-items: center;
+  color: black;
+}
+.userforminput{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
 }
 
 
