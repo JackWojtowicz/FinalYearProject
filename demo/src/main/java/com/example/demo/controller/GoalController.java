@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class GoalController {
+public class GoalController extends BaseController {
     @Autowired
     GoalRepo goalRepo;
     @Autowired

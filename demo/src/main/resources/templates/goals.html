@@ -15,6 +15,7 @@
             <a id="navbarlink" th:href="@{/revision}">Revision</a>
             <a id="navbarlink" th:href="@{/leaderboard}">LeaderBoard</a>
             <a id="navbarlink" href="#" th:href="@{/logout}">Logout</a>
+            <a id="navbarlink" th:if="${#strings.equals(userRole, 'ROLE_MEGAADMIN')}"href="#" th:href="@{/admin}">Admin</a>
         </div>
         <div th:each="goal:${alllist}">
             <div class="goaloverlay">

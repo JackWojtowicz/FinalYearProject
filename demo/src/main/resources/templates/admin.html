@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div id="adminnavbar">
+            <div id="adminlinks">
+            <a th:href="@{/admin/users}">Users</a>
+            </div>
+            <div id="adminlinks">
+            <a th:href="@{/admin/goals}">Goals</a>
+            </div>
+        </div>
+        <div id="totaluserdata">
+            <p th:text="'Total Users: '+${totalusers}"></p>
+        </div>
+        <div id="recentusers">
+            <p id="recentusertext">Recent Users: </p>
+            <span id="cycle"></span>
+        </div>
+        <div id="gradevsrevisionchart" style="height: 100%;margin: 2%;"></div>
+        <div layout:fragment="scripts">
+            <script th:inline="text">
+                var grade1 = parseFloat('[[${AverageGrade1}]]');
+                var grade2 = parseFloat('[[${AverageGrade2}]]');
+                var grade3 = parseFloat('[[${AverageGrade3}]]');
+                var grade4 = parseFloat('[[${AverageGrade4}]]');
+                var grade5 = parseFloat('[[${AverageGrade5}]]');
+
+            Highcharts.chart('gradevsrevisionchart', {
+            chart:{
+                type: 'column'
+            },
+            title: {
+                text: 'Grade VS AverageRevision'
+            },
+            xAxis: {
+                categories:["Grade: 1","Grade: 2","Grade: 3","Grade: 4","Grade: 5"]
+                
+            },
+            yAxis: {
+                min:0,
+                title: {
+                    text: 'Average Revision'
+                }
+            },
+            plotOptions:{
+                column:{
+                    pointPadding:0.2,
+                    borderWidth:0
+                }
+            },
+            series: [{
+                name: 'AverageRevision',
+                data: [grade1,grade2,grade3,grade4,grade5]
+                
+            }]
+        });
+            </script>
+            <style th:inline="text">
+                #cycle:after {
+                    animation-name:cycle;
+                    animation-duration: 8s;
+                    animation-iteration-count: infinite;
+                    content: "";
+                }
+                @keyframes cycle{
+                    0%{
+                        content:'[[${latestusers[0].username}]]';
+                    }
+                    20%{
+                        content:'[[${latestusers[1].username}]]';
+
+                    }
+                    40%{
+                        content:'[[${latestusers[2].username}]]';
+                    }
+                    60%{
+                        content:'[[${latestusers[3].username}]]';
+
+                    }
+                    80%{
+                        content:'[[${latestusers[4].username}]]';
+
+                    }
+                    100%{
+                        content:'[[${latestusers[0].username}]]';
+
+                    }
+                }
+
+            </style>
+        </div>
+    </div>

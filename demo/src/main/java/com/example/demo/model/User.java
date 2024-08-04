@@ -33,6 +33,8 @@ public class User {
     private String role;
     @Column
     private int score;
+    @Column
+    private int grade;
 
     public User(String username, String email, String password, String roles, int Score) {
         this.username = username;
@@ -40,6 +42,7 @@ public class User {
         this.password = password;
         this.role = roles;
         this.score = Score;
+        this.grade = 1;
     }
 
 }

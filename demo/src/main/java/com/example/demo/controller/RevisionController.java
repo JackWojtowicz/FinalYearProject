@@ -45,7 +45,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class RevisionController {
+public class RevisionController extends BaseController {
     @Autowired
     RevisionService revisionService;
     @Autowired
