@@ -10,10 +10,10 @@
     <div layout:fragment="content">
         <div id="adminnavbar">
             <div id="adminlinks">
-            <a th:href="@{/admin/goals}">Goals</a>
+            <a th:href="@{/admin}">Hub</a>
             </div>
             <div id="adminlinks">
-            <a th:href="@{/admin}">Hub</a>
+                <a href="#" th:href="@{/logout}">Logout</a>
             </div>
         </div>
         <div th:each="user:${users}">

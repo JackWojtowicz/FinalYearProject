@@ -15,6 +15,9 @@
             <div id="adminlinks">
             <a th:href="@{/admin}">Hub</a>
             </div>
+            <div id="adminlinks">
+                <a href="#" th:href="@{/logout}">Logout</a>
+            </div>
         </div>
             <div id="userupdateform">
                 <form th:object="${updateuser}" th:action="@{/admin/updateuser/accept/{id}(id=${user.id})}">

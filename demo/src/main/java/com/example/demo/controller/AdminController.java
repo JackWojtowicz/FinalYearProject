@@ -51,12 +51,6 @@ public class AdminController {
         return "adminusers";
     }
 
-    @GetMapping("/admin/goals")
-    public String admingoal(Model model) {
-        model.addAttribute("goals", goalrepo.findAll());
-        return "admingoals";
-    }
-
     @RequestMapping("/admin/updateuser/{id}")
     public String requestMethodName(Model model, @PathVariable long id) {
         model.addAttribute("user", userrepo.findById(id).get());

@@ -27,6 +27,8 @@ public class securityconfig {
                                                 .requestMatchers("/", "/style/**").permitAll()
                                                 .requestMatchers("/register", "/registerUser").permitAll()
                                                 // .requestMatchers("/user").hasAuthority("ROLE_USER")
+                                                .requestMatchers("/admin", "/admin/**")
+                                                .hasAuthority("ROLE_MEGAADMIN")
                                                 .anyRequest().authenticated())
                                 .userDetailsService(userService)
                                 .formLogin(form -> form
